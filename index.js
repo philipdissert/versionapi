@@ -4,7 +4,9 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 //Import Routes
-const authRoute = require('./routes/auth')
+const authRoute = require('./routes/auth');
+const postRoute = require('./routes/posts');
+
 
 dotenv.config();
 
@@ -20,5 +22,6 @@ mongoose.connect(process.env.DB_CONNECT,
 app.use(express.json());
 
 //Route Middelwares
-app.use('/api/user', authRoute)
+app.use('/api/user', authRoute);
+app.use('/api/posts', postRoute);
 app.listen(3000)
