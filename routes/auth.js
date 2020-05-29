@@ -49,6 +49,8 @@ router.post('/login', async (req, res) => {
     if(!validPass) return res.status(400).send(errorMessage);
 
     req.session.userId = user._id;
+    req.session.verifiedEmail = user.verifiedEmail;    
+    
     res.header(200).send("Logged In!");
 
     //Create and assign a token

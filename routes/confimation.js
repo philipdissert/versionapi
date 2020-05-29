@@ -7,11 +7,9 @@ router.get('/:token', async(req, res) => {
     try {
         const {user} = jwt.verify(req.params.token, process.env.EMAIL_SECRET);
         if(!user) return res.status(400).send('Unknown Web Token');
-        const existingUser = await User.findOneAndUpdate({ _id: user}, { $set: {verifiedEmail: true} }, {new: true, useFindAndModify: false},(err, result) => {
-            if(err) res.status(400).send();
-            result.save(); //Will noch nicht ganz
-            res.status(200).send(result);  
-            
+        await User.findOneAndUpdate({ _id: user}, { $set: {verifiedEmail: true} }, {useFindAndModify: false}, (err, user) => {
+            if(err) return res.status(400).send("Did not find User")
+            res.status(200).send("Email verified");
         });          
     } catch (err) {
         res.status(400).send(err);

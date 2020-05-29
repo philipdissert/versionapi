@@ -1,12 +1,17 @@
 //const nodemailer = require("nodemailer");
 //const sendmail = require('sendmail')();
 const jwt = require('jsonwebtoken'); 
+const User = require('./model/User');
 
-module.exports = async function (id, mail) {
+module.exports = async function (req, res) {
 
+    if(!req.user) res.status(400).send('Access Denied');
+    const user = await User.findOne({ _id: req.user});    
+    
     const emailToken = jwt.sign({user: id}, process.env.EMAIL_SECRET, {expiresIn: '1d'});
-    const url = `http://localhost:3000/confirmation/${emailToken}`;   
+    const url = `http://localhost:3000/api/emailverify/conf/${emailToken}`;   
     console.log(url);
+    console.log(user.email);
     
     
     

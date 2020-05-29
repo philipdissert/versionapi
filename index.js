@@ -7,8 +7,10 @@ const expressSessions = require('express-session');
 //Import Routes
 const authRoute = require('./routes/auth');
 const postRoute = require('./routes/posts');
+const verifyEmailSend = require('./routes/verifyEmail');
 const apiKeyRoute = require('./routes/apikeys');
-const confirmation = require('./routes/confimation');
+const verifyEmailConf = require('./routes/confimation');
+const versionApi = require('./routes/versionApi/versionApi');
 
 
 dotenv.config();
@@ -29,5 +31,7 @@ app.use(expressSessions({secret:process.env.TOKEN_SECRET, saveUninitialized: fal
 app.use('/api/user', authRoute);
 app.use('/api/posts', postRoute);
 app.use('/api/keys', apiKeyRoute);
-app.use('/confirmation', confirmation);
+app.use('/api/emailverify/conf', verifyEmailConf);
+app.use('/api/emailverify/send', verifyEmailSend);
+app.use('/api/versionapi', versionApi);
 app.listen(3000)

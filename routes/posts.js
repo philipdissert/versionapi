@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const verify = require('./verifyApiToken');
+const verify = require('../verifyMiddleware/verifyApiToken');
 const mailSender = require('../mailSender');
 
 router.get('/', verify,(req, res) => {

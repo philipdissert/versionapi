@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const verify = require('./verifyToken');
+const verify = require('../verifyMiddleware/verifyWithMail');
 const APIKeys = require('../model/ApiKey');
 const uuid = require('uuid');
 
