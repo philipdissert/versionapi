@@ -10,7 +10,7 @@ const postRoute = require('./routes/posts');
 const verifyEmailSend = require('./routes/verifyEmail');
 const apiKeyRoute = require('./routes/apikeys');
 const verifyEmailConf = require('./routes/confimation');
-const versionApi = require('./routes/versionApi/versionApi');
+const versionApi = require('./routes/versionApi');
 
 
 dotenv.config();
@@ -27,6 +27,13 @@ mongoose.connect(process.env.DB_CONNECT,
 app.use(express.json());
 app.use(expressSessions({secret:process.env.TOKEN_SECRET, saveUninitialized: false, resave: false}));
 
+//Allowing Cors
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 //Route Middelwares
 app.use('/api/user', authRoute);
 app.use('/api/posts', postRoute);
@@ -34,4 +41,4 @@ app.use('/api/keys', apiKeyRoute);
 app.use('/api/emailverify/conf', verifyEmailConf);
 app.use('/api/emailverify/send', verifyEmailSend);
 app.use('/api/versionapi', versionApi);
-app.listen(3000)
+app.listen(3300)
