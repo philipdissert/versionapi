@@ -16,7 +16,7 @@
     "express-sesssion": "^1.15.5",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.16",
-    "nodemailer": "^6.4.8",
+    "nodemailer": "^6.4.16",
     "sendmail": "^1.6.1",
     "uuid": "^8.1.0"
   },
